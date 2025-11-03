@@ -1,0 +1,4 @@
+filters:
+  - true # This filter closes ALL incoming Pull Requests
+commentBody: |
+  Thanks for your contribution! We appreciate the effort, but we are not accepted contributions at this early stage of development.

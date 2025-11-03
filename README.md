@@ -1,5 +1,5 @@
 # UsageMeter
-Short description and motivation.
+A Rails engine to track usage metrics of features, useful for implementing usage-based billing.
 
 ## Usage
 How to use my plugin.
@@ -22,7 +22,7 @@ $ gem install usage_meter
 ```
 
 ## Contributing
-Contribution directions go here.
+We are not actively accepting contributions at this early stage of development, and external pull Requests will be automatically closed.
 
 ## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as under the terms of the [License](LICENCE.txt)
