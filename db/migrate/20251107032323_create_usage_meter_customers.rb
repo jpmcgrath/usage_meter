@@ -4,7 +4,11 @@ class CreateUsageMeterCustomers < ActiveRecord::Migration[8.1]
       t.string :external_identifier
       t.string :external_type
       t.string :human_description
-      t.column :jsonb, :metadata, default: {}.to_json, null: false
+      if ActiveRecord::Base.connection.adapter_name == "PostgreSQL"
+        t.jsonb :metadata, default: {}, null: false
+      else
+        t.json :metadata, default: {}, null: false
+      end
 
       t.timestamps
     end
