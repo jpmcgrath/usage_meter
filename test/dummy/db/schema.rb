@@ -16,7 +16,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_07_045726) do
     t.string "external_identifier"
     t.string "external_type"
     t.string "human_description"
-    t.json "metadata", default: {}, null: false
+    t.json "metadata"
     t.datetime "updated_at", null: false
     t.index [ "external_type", "external_identifier" ], name: "idx_on_external_type_external_identifier_025c20894d", unique: true
   end
