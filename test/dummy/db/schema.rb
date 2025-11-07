@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.1].define(version: 2025_11_07_032323) do
-# Could not dump table "usage_meter_customers" because of following StandardError
-#   Unknown type 'metadata' for column 'jsonb'
-
+  # Could not dump table "usage_meter_customers" because of following StandardError
+  #   Unknown type 'metadata' for column 'jsonb'
 end
