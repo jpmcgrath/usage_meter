@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  external_identifier: MyString
+  external_type: MyString
+  human_description: MyString
+  metadata: MyText
+
+two:
+  external_identifier: MyString
+  external_type: MyString
+  human_description: MyString
+  metadata: MyText
