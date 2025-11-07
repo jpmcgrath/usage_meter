@@ -40,7 +40,7 @@ jobs:
       matrix:
         ruby: ['3.3', '3.4']
         rails_version: ['8.0', '8.1']
-
+        database: ['sqlite', 'postgresql', 'mysql']
     runs-on: ubuntu-latest
 
     # services:
@@ -63,6 +63,20 @@ jobs:
       - name: Install Rails
         run: |
           gem install rails -v ${{ matrix.rails_version }} --no-document
+
+      # Setup the database service
+      - name: Setup Database
+        run: |
+          sudo apt-get update
+          if [ "${{ matrix.database }}" = "postgresql" ]; then
+            sudo apt-get install -y postgresql
+            # Setup PostgreSQL service (optional if using GitHub-hosted services)
+            sudo service postgresql start
+          elif [ "${{ matrix.database }}" = "mysql" ]; then
+            sudo apt-get install -y  libaio1 libmysqlclient-dev mysql-server mysql-common
+            # Setup MySQL service (optional if using GitHub-hosted services)
+            sudo service mysql start
+          fi
 
       - name: Prepare database
         env:
