@@ -40,11 +40,14 @@ jobs:
       fail-fast: false
       matrix:
         ruby: ['3.3', '3.4']
-        rails_version: ['8.0', '8.1']
         database: ['sqlite', 'postgresql', 'mysql']
+        gemfile:
+          - rails_8.0.gemfile
+          - rails_8.1.gemfile
     env:
       DATABASE_URL_MYSQL: "mysql2://root:root@127.0.0.1:3306/test_db"
       DATABASE_URL_POSTGRESQL: "postgresql://runner:root@127.0.0.1:5432/test_db"
+      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}
 
     services:
         mysql:
@@ -72,12 +75,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      # Install specific Rails version gem if needed (e.g., in the dummy app)
-      - name: Install Rails
-        run: |
-          gem install rails -v ${{ matrix.rails_version }} --no-document
-
-      - name: 3. Set Dynamic DATABASE_URL
+      - name: Set Dynamic DATABASE_URL
         run: |
           if [ "${{ matrix.database }}" == "mysql" ]; then
             echo "DATABASE_URL=${DATABASE_URL_MYSQL}" >> $GITHUB_ENV
