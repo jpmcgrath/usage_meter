@@ -35,6 +35,12 @@ jobs:
         run: bin/rubocop -f github
 
   test:
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.3', '3.4']
+        rails_version: ['8.0', '8.1']
+
     runs-on: ubuntu-latest
 
     # services:
@@ -50,15 +56,25 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.9
+          ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
+
+      # Install specific Rails version gem if needed (e.g., in the dummy app)
+      - name: Install Rails
+        run: |
+          gem install rails -v ${{ matrix.rails_version }} --no-document
+
+      - name: Prepare database
+        env:
+          RAILS_ENV: test
+        run: bin/rails db:test:prepare
 
       - name: Run tests
         env:
           RAILS_ENV: test
           # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test
+        run: bin/rails test
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
