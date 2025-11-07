@@ -35,20 +35,33 @@ jobs:
         run: bin/rubocop -f github
 
   test:
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         ruby: ['3.3', '3.4']
         rails_version: ['8.0', '8.1']
         database: ['sqlite', 'postgresql', 'mysql']
-    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL_MYSQL: "mysql2://root:root@127.0.0.1:3306/test_db"
+      DATABASE_URL_POSTGRESQL: "postgresql://runner:root@127.0.0.1:5432/test_db"
 
-    # services:
-    #  redis:
-    #    image: valkey/valkey:8
-    #    ports:
-    #      - 6379:6379
-    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+    services:
+        mysql:
+          image: mysql:8.0
+          env: { MYSQL_ROOT_PASSWORD: root, MYSQL_DATABASE: test_db }
+          ports: ['3306:3306']
+          options: >-
+            --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+            --health-interval=10s --health-timeout=5s --health-retries=3
+        postgres:
+          image: postgres:15
+          env: { POSTGRES_USER: runner, POSTGRES_PASSWORD: root, POSTGRES_DB: test_db }
+          ports: ['5432:5432']
+          options: >-
+            --health-cmd="pg_isready -U runner -d test_db"
+            --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -64,18 +77,12 @@ jobs:
         run: |
           gem install rails -v ${{ matrix.rails_version }} --no-document
 
-      # Setup the database service
-      - name: Setup Database
+      - name: 3. Set Dynamic DATABASE_URL
         run: |
-          sudo apt-get update
-          if [ "${{ matrix.database }}" = "postgresql" ]; then
-            sudo apt-get install -y postgresql
-            # Setup PostgreSQL service (optional if using GitHub-hosted services)
-            sudo service postgresql start
-          elif [ "${{ matrix.database }}" = "mysql" ]; then
-            sudo apt-get install -y  libaio1 libmysqlclient-dev mysql-server mysql-common
-            # Setup MySQL service (optional if using GitHub-hosted services)
-            sudo service mysql start
+          if [ "${{ matrix.database }}" == "mysql" ]; then
+            echo "DATABASE_URL=${DATABASE_URL_MYSQL}" >> $GITHUB_ENV
+          elif [ "${{ matrix.database }}" == "postgresql" ]; then
+            echo "DATABASE_URL=${DATABASE_URL_POSTGRESQL}" >> $GITHUB_ENV
           fi
 
       - name: Prepare database
