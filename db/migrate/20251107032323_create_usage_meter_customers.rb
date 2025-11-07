@@ -1,4 +1,4 @@
-class CreateUsageMeterCustomers < ActiveRecord::Migration[8.0]
+class CreateUsageMeterCustomers < ActiveRecord::Migration[7.0]
   def change
     create_table :usage_meter_customers do |t|
       t.string :external_identifier
