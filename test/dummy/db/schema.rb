@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_07_032323) do
-  # Could not dump table "usage_meter_customers" because of following StandardError
-  #   Unknown type 'metadata' for column 'jsonb'
+ActiveRecord::Schema[8.1].define(version: 2025_11_07_045726) do
+  create_table "usage_meter_customers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "external_identifier"
+    t.string "external_type"
+    t.string "human_description"
+    t.json "metadata", default: {}, null: false
+    t.datetime "updated_at", null: false
+    t.index [ "external_type", "external_identifier" ], name: "idx_on_external_type_external_identifier_025c20894d", unique: true
+  end
 end
