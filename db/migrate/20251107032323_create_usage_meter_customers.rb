@@ -1,4 +1,6 @@
 class CreateUsageMeterCustomers < ActiveRecord::Migration[7.0]
+  PK_TYPE = ApplicationRecord.connection_config[:primary_key_type] rescue :bigint
+
   def change
     create_table :usage_meter_customers do |t|
       t.string :external_identifier
