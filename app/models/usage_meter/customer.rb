@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsageMeter
   class Customer < ApplicationRecord
     validates :external_type, presence: true

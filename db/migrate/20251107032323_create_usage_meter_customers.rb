@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateUsageMeterCustomers < ActiveRecord::Migration[7.0]
   PK_TYPE = begin
     ApplicationRecord.connection_config[:primary_key_type]
