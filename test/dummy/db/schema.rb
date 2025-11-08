@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_11_07_045726) do
-  create_table "usage_meter_customers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "external_identifier"
-    t.string "external_type"
-    t.string "human_description"
-    t.json "metadata"
-    t.datetime "updated_at", null: false
-    t.index [ "external_type", "external_identifier" ], name: "idx_on_external_type_external_identifier_025c20894d", unique: true
+ActiveRecord::Schema[7.0].define(version: 20_251_107_045_726) do
+  create_table 'usage_meter_customers', force: :cascade do |t|
+    t.datetime 'created_at', null: false
+    t.string 'external_identifier'
+    t.string 'external_type'
+    t.string 'human_description'
+    t.json 'metadata'
+    t.datetime 'updated_at', null: false
+    t.index %w[external_type external_identifier], name: 'idx_on_external_type_external_identifier_025c20894d',
+                                                   unique: true
   end
 end
