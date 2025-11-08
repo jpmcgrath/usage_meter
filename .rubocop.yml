@@ -1,5 +1,29 @@
+inherit_from: .rubocop_todo.yml
+
 # Overwrite or add rules to create your own house style
 #
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+plugins:
+  - rubocop-rails
+  - rubocop-performance
+
+# 2. Inherit the recommended rules from each plugin.
+# This ensures all the new cops are enabled.
+inherit_gem:
+  rubocop-rails:
+    - config/default.yml
+  rubocop-performance:
+    - config/default.yml
+
+# 3. Tell rubocop-rails what version you are using
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.1
+  TargetRailsVersion: 7.0
+  Exclude:
+    - 'db/**/*'
+    - 'vendor/**/*' # Good to also exclude vendor directory
+    - 'bin/*'       # And generated binstubs
