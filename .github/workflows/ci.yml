@@ -2,6 +2,7 @@ name: CI
 
 on:
   pull_request:
+    branches: [ main ]
   push:
     branches: [ main ]
 
@@ -90,7 +91,7 @@ jobs:
       - name: Prepare database
         env:
           RAILS_ENV: test
-        run: bin/rails db:test:prepare
+        run: bin/rails db:migrate
 
       - name: Run tests
         env:
