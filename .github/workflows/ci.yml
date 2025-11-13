@@ -94,8 +94,8 @@ jobs:
         run: |
           rm -f spec/dummy/db/schema.rb
           bundle exec rails db:drop
+          bundle exec rails db:create
           bundle exec rails db:migrate
-          bundle exec rails db:test:prepare
 
       - name: Run specs
         env:
