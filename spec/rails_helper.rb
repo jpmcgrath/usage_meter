@@ -83,10 +83,7 @@ RSpec.configure do |config|
 
   Shoulda::Matchers.configure do |shoulda_config|
     shoulda_config.integrate do |with|
-      # Choose the test framework (RSpec)
       with.test_framework :rspec
-
-      # Choose the library (Rails/ActiveRecord)
       with.library :rails
     end
   end
