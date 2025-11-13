@@ -1,9 +1,14 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'factory_bot_rails'
+require 'shoulda-matchers'
+
 ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
+require_relative '../spec/dummy/config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 # Uncomment the line below in case you have `--require rails_helper` in the `.rspec` file
 # that will avoid rails generators crashing because migrations haven't been run yet
 # return unless Rails.env.test?
@@ -69,4 +74,20 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include FactoryBot::Syntax::Methods
+  config.before(:suite) do
+    # This line searches the default paths and loads the definitions
+    FactoryBot.find_definitions
+  end
+
+  Shoulda::Matchers.configure do |shoulda_config|
+    shoulda_config.integrate do |with|
+      # Choose the test framework (RSpec)
+      with.test_framework :rspec
+
+      # Choose the library (Rails/ActiveRecord)
+      with.library :rails
+    end
+  end
 end
