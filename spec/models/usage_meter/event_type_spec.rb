@@ -6,6 +6,7 @@ module UsageMeter
   RSpec.describe EventType, type: :model do
     describe 'validations' do
       let!(:existing_record) { described_class.create(key: 'existing_key') }
+
       it { is_expected.to validate_presence_of(:key) }
       it { is_expected.to validate_uniqueness_of(:key) }
 
