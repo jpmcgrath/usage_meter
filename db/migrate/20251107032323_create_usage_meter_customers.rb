@@ -9,8 +9,13 @@ class CreateUsageMeterCustomers < ActiveRecord::Migration[7.0]
 
   def change
     create_table :usage_meter_customers do |t|
-      t.string :external_identifier
-      t.string :external_type
+      if ActiveRecord::Base.connection.adapter_name == 'Mysql2'
+        t.string :external_identifier, collation: "utf8mb4_bin"
+        t.string :external_type, collation: "utf8mb4_bin"
+      else
+        t.string :external_identifier
+        t.string :external_type
+      end
       t.string :human_description
       if ActiveRecord::Base.connection.adapter_name == 'PostgreSQL'
         t.jsonb :metadata
