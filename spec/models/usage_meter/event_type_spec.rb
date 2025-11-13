@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module UsageMeter
-  RSpec.describe EventType, type: :model do
+  RSpec.describe EventType do
     describe 'validations' do
       let!(:existing_record) { described_class.create(key: 'existing_key') }
 
@@ -28,13 +28,6 @@ module UsageMeter
           end
         end
       end
-    end
-
-    describe 'Associations' do
-      # Checks that the model has an array of associated UsageMeter::Event objects
-      # it { is_expected.to have_many(:events).class_name('UsageMeter::Event').dependent(:destroy) }
-      # Or, if using the direct class name:
-      # it { is_expected.to have_many(:events).dependent(:destroy) }
     end
   end
 end

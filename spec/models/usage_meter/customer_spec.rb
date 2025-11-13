@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe UsageMeter::Customer, type: :model do
+RSpec.describe UsageMeter::Customer do
   let(:valid_attributes) { { external_type: 'test_type', external_identifier: 'test_id' } }
 
   describe 'Validations' do
@@ -14,12 +14,12 @@ RSpec.describe UsageMeter::Customer, type: :model do
   end
 
   describe 'creation and readonly behavior' do
-    let(:customer) { UsageMeter::Customer.find_by(valid_attributes) }
+    let(:customer) { described_class.find_by(valid_attributes) }
 
     it 'allows creation but is readonly and prevents updates after save' do
       expect do
-        UsageMeter::Customer.create!(valid_attributes)
-      end.to change(UsageMeter::Customer, :count).by(1)
+        described_class.create!(valid_attributes)
+      end.to change(described_class, :count).by(1)
 
       expect(customer).to be_present
       expect(customer).to be_persisted
