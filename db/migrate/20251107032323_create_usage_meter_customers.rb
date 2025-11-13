@@ -20,6 +20,6 @@ class CreateUsageMeterCustomers < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :usage_meter_customers, %i[external_type external_identifier], unique: true
+    add_index :usage_meter_customers, %i[external_type external_identifier], unique: true, name: :index_usage_meter_customers_on_external_type_and_identifier
   end
 end
