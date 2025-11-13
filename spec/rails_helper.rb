@@ -4,6 +4,12 @@
 require 'spec_helper'
 require 'factory_bot_rails'
 require 'shoulda-matchers'
+require 'simplecov'
+
+SimpleCov.start 'rails' do
+  # This block is optional
+  add_filter '/spec/' # Exclude test files from coverage
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../spec/dummy/config/environment'
