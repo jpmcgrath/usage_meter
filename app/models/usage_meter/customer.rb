@@ -5,7 +5,7 @@ module UsageMeter
   # A customer in an enttity who's usage is being metered. This is typically a Tenant
   # Organization, or User.
   #
-  # UseageMeter tracks it's own customers to ensure consistency and integrity of usage data.
+  # UsageMeter tracks it's own customers to ensure consistency and integrity of usage data.
   # Each customer will have a unique composite key of external_type and external_identifier.
   # Usage data is then associated with these customers, with foreign keys referencing the
   # to ensure referential integrity.
