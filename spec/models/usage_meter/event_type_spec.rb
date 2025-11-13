@@ -4,11 +4,15 @@ require 'rails_helper'
 
 module UsageMeter
   RSpec.describe EventType do
-    describe 'validations' do
-      let!(:existing_record) { described_class.create(key: 'existing_key') }
+    let(:event_type) { described_class.new }
 
+    describe 'validations' do
       it { is_expected.to validate_presence_of(:key) }
-      it { is_expected.to validate_uniqueness_of(:key) }
+
+      it do
+        described_class.create(key: 'existing_key')
+        expect(event_type).to validate_uniqueness_of(:key)
+      end
 
       describe 'key format' do
         it 'is valid with a proper format' do
@@ -24,8 +28,13 @@ module UsageMeter
           invalid_keys.each do |invalid_key|
             event_type = described_class.new(key: invalid_key)
             expect(event_type).to be_invalid, "#{invalid_key.inspect} should be invalid"
-            expect(event_type.errors[:key]).to include('only allows letters, numbers, underscores, and hyphens')
           end
+        end
+
+        it 'errors with an error mesage' do
+          event_type = described_class.new(key: 'invalid key')
+          event_type.valid?
+          expect(event_type.errors[:key]).to include('must satisfy the regular expression /\\A[a-z0-9\\-_]+\\z/')
         end
       end
     end

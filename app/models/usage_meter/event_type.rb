@@ -11,10 +11,13 @@ module UsageMeter
   # Key must be unique, to allow lookup
   class EventType < ApplicationRecord
     KEY_FORMAT = /\A[a-z0-9\-_]+\z/
+    def self.key_format
+      KEY_FORMAT
+    end
 
     validates :key, presence: true
     validates :key, uniqueness: true
-    validates :key, format: { with: KEY_FORMAT }
+    validates :key, format: { with: key_format, message: :invalid, key_format_regex: key_format.inspect }
 
     attr_readonly :key
   end

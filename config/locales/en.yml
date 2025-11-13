@@ -5,4 +5,4 @@ en:
         usage_meter/event_type:
           attributes:
             key:
-              invalid: "only allows letters, numbers, underscores, and hyphens"
+              invalid: "must satisfy the regular expression %{key_format_regex}"
