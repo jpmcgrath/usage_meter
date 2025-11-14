@@ -3,7 +3,6 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ main ]
 
 jobs:
   lint:
@@ -83,21 +82,26 @@ jobs:
         run: |
           if [ "${{ matrix.database }}" == "mysql" ]; then
             echo "DATABASE_URL=${DATABASE_URL_MYSQL}" >> $GITHUB_ENV
+            echo "DB_ADAPTER=mysql2" >> $GITHUB_ENV
           elif [ "${{ matrix.database }}" == "postgresql" ]; then
             echo "DATABASE_URL=${DATABASE_URL_POSTGRESQL}" >> $GITHUB_ENV
+            echo "DB_ADAPTER=postgresql" >> $GITHUB_ENV
           fi
 
       - name: Prepare database
         env:
           RAILS_ENV: test
-        run: bin/rails db:test:prepare
+        run: |
+          rm -f spec/dummy/db/schema.rb
+          bundle exec rails db:drop
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+          bundle exec rails db:test:prepare
 
-      - name: Run tests
+      - name: Run specs
         env:
           RAILS_ENV: test
-          # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails test
+        run: bundle exec rspec
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v5
