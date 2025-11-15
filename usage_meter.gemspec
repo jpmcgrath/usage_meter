@@ -36,5 +36,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec_rails'
   spec.add_development_dependency 'shoulda-matchers'
   spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'sqlite3', '>= 2.8.0'
+  spec.add_development_dependency 'sqlite3', '>= 2.0.0'
 end
