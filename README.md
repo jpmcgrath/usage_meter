@@ -6,15 +6,22 @@ How to use my plugin.
 
 ## Supported Versions
 
-This gem supports the following Ruby, Rails, and database versions.
+Usage Meter supports all stable versions of Ruby, and
+Ruby on Rails, as per those project's maintenance policies. Support
+for out of maintenance versions of Ruby and Rails will continue
+whilst not hampering development efforts.
+
+https://rubyonrails.org/maintenance
+
+https://www.ruby-lang.org/en/downloads/branches/
 
 ### Ruby
 
-- Ruby 3.+ and above (tested with 3.0, 3.1, 3.2, 3.3)
+- Ruby 3.0+ and above
 
 ### Rails
 
-- Rails 8.x and above (tested with 8.x)
+- Rails 7.0.x and above
 
 ### Databases
 
