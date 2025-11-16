@@ -43,7 +43,6 @@ jobs:
       matrix:
         ruby: ['3.2', '3.3', '3.4']
         database: ['sqlite', 'postgresql', 'mysql']
-        rubygems: ['latest']
         gemfile:
           - rails_7.2.gemfile
           - rails_8.0.gemfile
@@ -55,7 +54,6 @@ jobs:
           - ruby: '3.0'
             gemfile: 'rails_7.0.gemfile'
             database: 'mysql'
-            rubygems: '3.3.22'
     env:
       DATABASE_URL_MYSQL: "mysql2://root:root@127.0.0.1:3306/test_db"
       DATABASE_URL_POSTGRESQL: "postgresql://runner:root@127.0.0.1:5432/test_db"
@@ -85,7 +83,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          rubygems: ${{ matrix.rubygems }}
           bundler-cache: true
 
       - name: Set Dynamic DATABASE_URL

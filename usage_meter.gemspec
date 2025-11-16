@@ -25,10 +25,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '>= 7.0.0'
 
   spec.add_development_dependency 'factory_bot_rails'
-  spec.add_development_dependency 'mysql2', '>= 0.5.7'
+  spec.add_development_dependency 'mysql2'
   spec.add_development_dependency 'pg', '~> 1.6.2'
-  spec.add_development_dependency 'reek', '6.5.0'
-  spec.add_development_dependency 'rspec-rails', '>= 7.0.0'
+  spec.add_development_dependency 'reek'
+  spec.add_development_dependency 'rspec-rails'
   spec.add_development_dependency 'rubocop', '~> 1.81.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.26.1'
   spec.add_development_dependency 'rubocop-rails', '~> 2.33.0'
@@ -36,5 +36,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec_rails'
   spec.add_development_dependency 'shoulda-matchers'
   spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'sqlite3', '>= 2.0.0'
+  spec.add_development_dependency 'sqlite3'
 end
