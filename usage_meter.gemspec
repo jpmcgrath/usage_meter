@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec-rails', '>= 8.0.2'
   spec.add_development_dependency 'rubocop', '~> 1.81.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.26.1'
-  spec.add_development_dependency 'rubocop-rails', '~> 2.33.0'
+  spec.add_development_dependency 'rubocop-rails', '~> 2.34.0'
   spec.add_development_dependency 'rubocop-rspec'
   spec.add_development_dependency 'rubocop-rspec_rails'
   spec.add_development_dependency 'shoulda-matchers'
