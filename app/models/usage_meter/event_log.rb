@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 module UsageMeter
+  # EventLog is used to record an event for a customer
+  #
+  # Each event has a customer and a type
+  # This class/table represents and append only log, so
+  # make everything readonly after persistance.
+  # Applications can record extra data in the free form
+  # json col.
+  # Each event will have a quantity, that must be positive.
+  # These quantities will be aggregated on customer and
+  # type to summarize usage for a period.
   class EventLog < ApplicationRecord
     belongs_to :customer
     belongs_to :event_type
