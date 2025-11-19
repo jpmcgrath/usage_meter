@@ -12,6 +12,8 @@ module UsageMeter
   #
   # Once created, records are readonly by design to prevent tampering with historical usage data.
   class Customer < ApplicationRecord
+    has_many :event_logs, class_name: 'UsageMeter::Customer', inverse_of: :customer, dependent: nil
+
     validates :external_type, presence: true
     validates :external_identifier, presence: true, uniqueness: { scope: :external_type }
 

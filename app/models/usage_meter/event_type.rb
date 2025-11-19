@@ -15,6 +15,8 @@ module UsageMeter
       KEY_FORMAT
     end
 
+    has_many :event_logs, class_name: 'UsageMeter::EventLog', inverse_of: :event_type, dependent: nil
+
     validates :key, presence: true
     validates :key, uniqueness: true
     validates :key, format: { with: key_format, message: :invalid, key_format_regex: key_format.inspect }
