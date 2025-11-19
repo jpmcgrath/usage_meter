@@ -12,8 +12,8 @@ module UsageMeter
   # These quantities will be aggregated on customer and
   # type to summarize usage for a period.
   class EventLog < ApplicationRecord
-    belongs_to :customer, optional: false
-    belongs_to :event_type, optional: false
+    belongs_to :customer, class_name: 'UsageMeter::Customer', foreign_key: 'usage_meter_customer_id', optional: false
+    belongs_to :event_type, class_name: 'UsageMeter::EventType', foreign_key: 'usage_meter_event_type_id', optional: false
     # belongs_to :aggregate
 
     validates :publishable_id, presence: true, uniqueness: true

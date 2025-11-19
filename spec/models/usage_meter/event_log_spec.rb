@@ -5,8 +5,8 @@ require 'rails_helper'
 module UsageMeter
   RSpec.describe EventLog do
     describe 'associations' do
-      it { is_expected.to belong_to(:customer).class_name('Customer') }
-      it { is_expected.to belong_to(:event_type).class_name('EventType') }
+      it { is_expected.to belong_to(:customer).class_name('UsageMeter::Customer') }
+      it { is_expected.to belong_to(:event_type).class_name('UsageMeter::EventType') }
     end
 
     describe 'validations' do
